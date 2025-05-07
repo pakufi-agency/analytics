@@ -1,5 +1,10 @@
+[build]
+  command = "yarn run build"
+  publish = ".next"
+
 [functions]
 included_files = ["node_modules/.geo/**"]
+node_bundler = "esbuild"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"

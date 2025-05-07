@@ -18,6 +18,12 @@ const privateMode = process.env.PRIVATE_MODE;
 const trackerScriptName = process.env.TRACKER_SCRIPT_NAME;
 const trackerScriptURL = process.env.TRACKER_SCRIPT_URL;
 
+module.exports.config = {
+  api: {
+    bodyParser: true, // Ensure Netlify Functions don't break on POST requests
+  },
+};
+
 const contentSecurityPolicy = [
   `default-src 'self'`,
   `img-src * data:`,
@@ -62,26 +68,26 @@ const trackerHeaders = [
 const apiHeaders = [
   {
     key: 'Access-Control-Allow-Origin',
-    value: '*'
+    value: '*',
   },
   {
     key: 'Access-Control-Allow-Headers',
-    value: '*'
+    value: '*',
   },
   {
     key: 'Access-Control-Allow-Methods',
-    value: 'GET, DELETE, POST, PUT'
+    value: 'GET, DELETE, POST, PUT',
   },
   {
     key: 'Access-Control-Max-Age',
-    value: corsMaxAge || '86400'
+    value: corsMaxAge || '86400',
   },
 ];
 
 const headers = [
   {
     source: '/api/:path*',
-    headers: apiHeaders
+    headers: apiHeaders,
   },
   {
     source: '/:path*',
